@@ -1,13 +1,22 @@
-name: Hello World Workflow
+name: Hardware Heroes
 on:
   push:
     branches:
-      - main
+      - detect-hardware.py
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Hello World
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Python script
         run: |
-          echo "Hello World!"
-          echo "This is a GitHub Actions workflow!"
+          python detect-hardware.py > output.txt
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: hardware-info
+          path: output.txt
+      - name: Display output
+        run: |
+          cat output.txt
