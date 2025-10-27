@@ -2,7 +2,7 @@ name: Hardware Heroes
 on:
   push:
     branches:
-      - main
+      - detect-hardware.py
 jobs:
   build:
     runs-on: ubuntu-latest
