@@ -1,0 +1,22 @@
+name: Hardware Heroes
+on:
+  push:
+    branches:
+      - detect-hardware.py
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Python script
+        run: |
+          python detect-hardware.py > output.txt
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: hardware-info
+          path: output.txt
+      - name: Display output
+        run: |
+          cat output.txt
